@@ -16,6 +16,7 @@
 		203FEE4429F9E90400B9F1CE /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203FEE4329F9E90400B9F1CE /* EmojiArtDocument.swift */; };
 		203FEE4729F9FE0300B9F1CE /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203FEE4529F9FE0300B9F1CE /* UtilityExtensions.swift */; };
 		203FEE4829F9FE0300B9F1CE /* UtilityViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203FEE4629F9FE0300B9F1CE /* UtilityViews.swift */; };
+		2065157F2AA4902600A72DF0 /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2065157E2AA4902600A72DF0 /* PaletteStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		203FEE4329F9E90400B9F1CE /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
 		203FEE4529F9FE0300B9F1CE /* UtilityExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		203FEE4629F9FE0300B9F1CE /* UtilityViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityViews.swift; sourceTree = "<group>"; };
+		2065157E2AA4902600A72DF0 /* PaletteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				203FEE3F29F9E37B00B9F1CE /* EmojiArtModel.swift */,
 				203FEE4129F9E6F100B9F1CE /* EmojiArtModel.Background.swift */,
 				203FEE4329F9E90400B9F1CE /* EmojiArtDocument.swift */,
+				2065157E2AA4902600A72DF0 /* PaletteStore.swift */,
 			);
 			path = EmojiArt;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				203FEE4829F9FE0300B9F1CE /* UtilityViews.swift in Sources */,
+				2065157F2AA4902600A72DF0 /* PaletteStore.swift in Sources */,
 				203FEE3429F9E30800B9F1CE /* EmojiArtDocumentView.swift in Sources */,
 				203FEE3229F9E30800B9F1CE /* EmojiArtApp.swift in Sources */,
 				203FEE4729F9FE0300B9F1CE /* UtilityExtensions.swift in Sources */,
