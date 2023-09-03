@@ -11,18 +11,62 @@ class EmojiArtDocument: ObservableObject {
     
     @Published private(set) var emojiArt: EmojiArtModel {
         didSet {
+            scheduleAutosave()
             if emojiArt.background != oldValue.background {
                 fetchBackgroundImageDataIfNecessary();
             }
         }
     }
     
+    private var autosaveTimer: Timer?
+    
+    private func scheduleAutosave() {
+        autosaveTimer?.invalidate()
+        autosaveTimer = Timer.scheduledTimer(withTimeInterval: AutosaveConstants.coalescingInterval, repeats: false) {_ in
+            self.autoSave()
+        }
+    }
+    
+    private struct AutosaveConstants {
+        static let filename = "Autosaved.emojiart"
+        static var url: URL? {
+            let documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            return documentDir?.appendingPathComponent(filename)
+        }
+        static let coalescingInterval = 5.0
+    }
+    
+    private func autoSave() {
+        if let url = AutosaveConstants.url {
+            save(to: url)
+        }
+    }
+    
+    private func save(to url: URL) {
+        let thisFunc = "\(String(describing: self)).\(#function)"
+        do {
+            let data: Data = try emojiArt.json()
+            print("\(thisFunc) json = \(String(data: data, encoding: .utf8) ?? "nil")")
+            try data.write(to: url)
+            print("\(thisFunc) success!")
+        } catch let encodingErr where encodingErr is EncodingError {
+            print("\(thisFunc) couldn't encode EmojiArt as JSON because \(encodingErr.localizedDescription)")
+        } catch {
+            print("\(thisFunc) error = \(error)")
+        }
+    }
+    
     init() {
-        emojiArt = EmojiArtModel()
-        emojiArt.addEmoji("🥰", at: (-200, -100), size: 80)
-        emojiArt.addEmoji("🫣", at: (50, 100), size: 40)
-//        emojiArt.addEmoji("", at: (-200, -100), size: 80)
-//        emojiArt.addEmoji("", at: (-200, -100), size: 80)
+        if let url = AutosaveConstants.url, let autosavedEmojiArt = try? EmojiArtModel(fileUrl: url) {
+            emojiArt = autosavedEmojiArt
+            fetchBackgroundImageDataIfNecessary()
+        } else {
+            emojiArt = EmojiArtModel()
+            emojiArt.addEmoji("🥰", at: (-200, -100), size: 80)
+            emojiArt.addEmoji("🫣", at: (50, 100), size: 40)
+            //        emojiArt.addEmoji("", at: (-200, -100), size: 80)
+            //        emojiArt.addEmoji("", at: (-200, -100), size: 80)
+        }
     }
     
     var emojis: [EmojiArtModel.Emoji] { emojiArt.emojis }
